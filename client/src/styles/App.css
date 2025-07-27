@@ -1,42 +1,107 @@
+/* client/src/styles/App.css */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34; /* Your original dark background */
+  color: white; /* Your original white text */
+  height: 100%; /* Ensure body takes full height */
+}
+
+#root {
+  height: 100%; /* Ensure #root also takes full height to allow .App to fill */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 .App {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 900px; /* Limit overall app width */
-  margin: 0 auto;
-  align-items: center;
   text-align: center;
+  min-height: 100vh; /* Ensures app fills viewport height */
+  display: flex;
+  flex-direction: column; /* Stacks header and main vertically */
+  align-items: center; /* Centers content horizontally within the app */
+  justify-content: center; /* Centers content vertically within the app */
+  font-size: calc(10px + 2vmin);
 }
 
 .app-header {
-  padding: 20px;
-  background-color: #20232a;
-  width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
-}
-
-.app-header h1 {
-  margin: 0;
-  color: #61dafb;
-  font-size: 2.5rem;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-}
-
-main {
-  flex-grow: 1;
+  background-color: #282c34; /* Your original header background */
+  min-height: 20vh; /* Ensures header has a minimum height */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 0 20px;
-  box-sizing: border-box;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Your original text shadow */
+  width: 100%; /* Header takes full width */
 }
 
-.not-found {
-  margin-top: 50px;
-  font-size: 1.2rem;
-  color: #ff6b6b;
+.app-header h1 {
+    margin: 0;
+}
+
+main {
+    flex-grow: 1; /* Allows main to take all available vertical space */
+    display: flex;
+    flex-direction: column; /* Stacks content within main vertically */
+    align-items: center; /* Centers content horizontally within main */
+    justify-content: center; /* Centers content vertically within main */
+    width: 100%; /* Main takes full width */
+    padding: 20px; /* Add some padding to main if content gets too wide */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+/* NEW: Common "Card" Styling for main content boxes - ADJUSTED FOR SMALLER SIZE */
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally within the card */
+    justify-content: center; /* Center content vertically within the card */
+    gap: 20px; /* Adjusted: Smaller space between main sections within the card */
+    padding: 15px; /* Adjusted: Smaller padding */
+    border-radius: 10px;
+    background-color: #363a43; /* Common background color for the box */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Common box shadow */
+    width: 100%;
+    max-width: 380px; /* Adjusted: Smaller maximum width for the box */
+    box-sizing: border-box; /* Include padding in width */
+    text-align: center; /* Ensure text is centered within its lines */
+}
+
+/* GLOBAL: Error message styling */
+.error-message {
+    color: #ff6b6b; /* Red for errors */
+    background-color: #4b2b2b;
+    border: 1px solid #ff6b6b;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    text-align: center;
+    width: 100%;
+    max-width: 350px; /* Ensures it doesn't get too wide outside cards */
+    box-sizing: border-box;
+}
+
+/* GLOBAL: Info message styling (if still needed anywhere, otherwise can remove) */
+.info-message {
+    color: #61dafb; /* Blue for info */
+    background-color: #2b3a4b;
+    border: 1px solid #61dafb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    text-align: center;
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
 }

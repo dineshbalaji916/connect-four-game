@@ -42,8 +42,10 @@ const HomePage = () => {
 
 
   return (
-    <div className="home-page">
+    // MODIFIED: Added " card" to the className for consistent styling
+    <div className="home-page card">
       <h2>Welcome to Connect Four!</h2>
+      {/* GLOBAL: error and message components here now */}
       {error && <div className="error-message">{error}</div>}
       {message && <div className="info-message">{message}</div>}
 
@@ -72,10 +74,11 @@ const HomePage = () => {
       )}
 
       {/* Display room info if a room is active, but not for navigation purposes here */}
+      {/* REMOVED: Redundant "Waiting for an opponent..." message from here */}
       {(gameStatus === 'waiting' || gameStatus === 'playing' || gameStatus === 'game-over') && roomId && (
         <div className="room-info">
           <p>You are in Room: <strong>{roomId}</strong></p>
-          {gameStatus === 'waiting' && <p>Waiting for an opponent...</p>}
+          {/* REMOVED: {gameStatus === 'waiting' && <p>Waiting for an opponent...</p>} */}
           {gameStatus === 'playing' && <p>Game in progress...</p>}
           {gameStatus === 'game-over' && <p>Game has ended.</p>}
         </div>

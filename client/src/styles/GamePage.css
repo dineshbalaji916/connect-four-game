@@ -1,60 +1,191 @@
+/* client/src/styles/GamePage.css */
+
 .game-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  width: 100%;
-  max-width: 700px; /* Max width for the game area */
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
-.game-page .game-message, .game-page .error-message {
-  font-size: 1.1rem;
-  margin-top: 15px;
-  padding: 10px 15px;
-  border-radius: 5px;
-  width: 80%;
-  max-width: 400px;
+/* --- GameBoard Container (Adjusted Cell Size) --- */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(7, var(--cell-size)); 
+    grid-template-rows: repeat(6, var(--cell-size)); 
+    
+    background-color: #363a43; /* Your original game board background */
+    border-radius: 10px; 
+    padding: 20px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    gap: 10px;
+    width: fit-content; /* Ensure board takes only necessary width */
+    margin: 20px auto;
+
+    --cell-size: 45px; /* ADJUSTED: Reduced cell size to make board smaller and fit without scrolling */
 }
 
-.game-page .game-message {
-  background-color: #4CAF50; /* Green for success/info */
-  color: white;
+/* --- Individual Cells (Empty Slots - Your Original Styling) --- */
+.game-board .cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 50%; 
+    background-color: #444a57; /* Your original empty slot color */
+    cursor: pointer;
+    position: relative; 
+    transition: transform 0.1s ease-out;
 }
 
-.game-page .error-message {
-  background-color: #f44336; /* Red for errors */
-  color: white;
+.game-board .cell:not(.filled):hover {
+    transform: scale(1.05);
 }
 
-.scoreboard {
-  background-color: #444a57;
-  padding: 15px 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
-  width: 100%;
-  max-width: 300px;
-  text-align: left;
+/* --- Pieces (Your Original Styling) --- */
+.game-board .piece {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; 
+    transform: translateY(-100px); 
+    animation: dropPiece 0.5s forwards ease-out; 
 }
 
-.scoreboard h3 {
-  color: #61dafb;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-  text-align: center;
+@keyframes dropPiece {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.scoreboard p {
-  margin: 5px 0;
-  font-size: 1.1rem;
-  color: #e0e0e0;
-  display: flex;
-  justify-content: space-between;
+.game-board .piece.player1 {
+    background-color: #ff6b6b; /* Your original Player 1 color */
 }
 
-.scoreboard .player-score {
-  font-weight: bold;
+.game-board .piece.player2 {
+    background-color: #ffd166; /* Your original Player 2 color */
+}
+
+/* --- Turn Indicator (Your Original Styling) --- */
+.turn-indicator {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #444a57;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #61dafb;
+}
+
+.turn-indicator.player1-turn {
+    color: #ff6b6b;
+}
+
+.turn-indicator.player2-turn {
+    color: #ffd166;
+}
+
+/* --- .game-page.waiting-screen will no longer be the card; RoomDisplay takes that role --- */
+.game-page.waiting-screen {
+    display: flex; /* Keep display: flex to center its child (RoomDisplay) */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+/* --- RoomDisplay as the main card container for the waiting screen --- */
+/* Its core box styling will now come from .card in App.css */
+.room-display {
+    display: flex; /* Keep flex properties to layout its own children */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Other internal flex-gap handled by .card, can override if needed */
+}
+
+/* Specific styles for elements inside RoomDisplay if needed */
+.room-display h2 {
+    color: #61dafb; /* Or white, matching App.css body text */
+    font-size: 1.8em; /* Match main card heading size */
+    margin-bottom: 15px; /* Space between heading and Room ID */
+}
+
+.room-id-text {
+    font-size: 1.1em;
+    margin-bottom: 20px; /* Space before Leave Room button */
+}
+
+.room-id-text strong {
+    color: #ffd166; /* Highlight Room ID */
+}
+
+.hint {
+    font-size: 0.9em;
+    color: #ccc;
+    margin-bottom: 20px; /* Space before Leave Room button */
+}
+
+/* Ensure buttons within RoomDisplay look consistent */
+/* Re-use .btn-primary and .btn-secondary classes from App.css or define here if not global */
+/* Assuming .btn-primary and .btn-secondary are defined globally or added here */
+.room-display .btn-primary,
+.room-display .btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.room-display .btn-primary {
+    background-color: #ff6b6b; /* Red for primary action (Leave Room) */
+    color: white;
+}
+.room-display .btn-primary:hover {
+    background-color: #e05c5c;
+}
+
+.room-display .btn-secondary {
+    background-color: #61dafb; /* Blue for secondary (Copy Link) */
+    color: white;
+}
+.room-display .btn-secondary:hover {
+    background-color: #4ac0e0;
+}
+
+
+/* --- Opponent Left Screen (Your Original Styling) --- */
+.game-page.opponent-left-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    padding: 40px;
+    background-color: #363a43; /* Your original background */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    max-width: 400px;
+}
+
+.game-page.opponent-left-screen h2 {
+    color: #ff6b6b; /* Your original color */
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+.game-page.opponent-left-screen .message-text {
+    font-size: 1.1em;
 }

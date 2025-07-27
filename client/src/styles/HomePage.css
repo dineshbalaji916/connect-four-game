@@ -1,63 +1,74 @@
+/* client/src/styles/HomePage.css */
+
+/* .home-page will get its main box styling from the .card class in App.css */
+/* Make sure your HomePage.jsx <div className="home-page"> also has className="card" */
 .home-page {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #363a43;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  max-width: 450px;
+    /* No direct box styling here, it inherits from .card */
+    /* Only specific overrides or internal layout for HomePage */
 }
 
 .home-page section {
-  background-color: #444a57;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 .home-page h2 {
-  color: #61dafb;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 1.8rem;
+    color: #61dafb; /* Your original h2 color */
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
 }
 
 .home-page .join-by-id {
-  display: flex;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
 }
 
 .home-page .join-by-id input {
-  flex-grow: 1;
-  min-width: 150px; /* Ensure input is not too small */
+    flex-grow: 1;
+    min-width: 150px;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #444;
+    color: white;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.home-page button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #61dafb; /* Your original button color */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.home-page button:hover {
+    background-color: #4ac0e0;
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-  .home-page {
-    padding: 15px;
-  }
+    .home-page {
+        padding: 15px;
+    }
 
-  .home-page section {
-    padding: 20px;
-  }
+    .home-page h2 {
+        font-size: 1.5rem;
+    }
 
-  .home-page h2 {
-    font-size: 1.5rem;
-  }
-
-  .home-page button,
-  .home-page input {
-    width: 100%; /* Full width on small screens */
-    margin: 5px 0;
-  }
+    .home-page button,
+    .home-page input {
+        width: 100%;
+        margin: 5px 0;
+    }
 }

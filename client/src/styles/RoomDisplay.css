@@ -1,64 +1,50 @@
+/* client/src/styles/RoomDisplay.css */
+
+/* .room-display now acts as the main card. Its core styling comes from .card in App.css. */
+/* This file is for styling elements *within* the RoomDisplay component, not its main box. */
 .room-display {
-  background-color: #444a57;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 20px;
+    /* The .card class in App.css already gives it: */
+    /* display: flex; flex-direction: column; align-items: center; gap; padding; */
+    /* background-color; border-radius; box-shadow; width; max-width; box-sizing; text-align */
+    /* So, very little specific styling is needed here for the main container */
 }
 
+/* Styles for the main heading within the RoomDisplay card */
 .room-display h2 {
-  color: #61dafb;
-  font-size: 2rem;
-  margin-bottom: 20px;
+    color: #61dafb; /* Accent color for the main heading */
+    font-size: 1.8em; /* Consistent with other main headings */
+    margin-top: 0; /* Remove default h2 top margin */
+    margin-bottom: 15px; /* Space after the heading */
 }
 
-.room-display p {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
+/* Styles for the "Room ID" text */
+.room-display .room-id-text {
+    font-size: 1.1em;
+    margin-bottom: 20px; /* Space before the Leave Room button */
+    color: white; /* Ensure text is visible */
 }
 
-.room-display strong {
-  color: #e0e0e0;
-  background-color: #3a3f4a;
-  padding: 5px 10px;
-  border-radius: 5px;
-  letter-spacing: 2px;
+.room-display .room-id-text strong {
+    color: #ffd166; /* Highlight the actual Room ID */
+    font-weight: bold;
 }
 
-.room-display .copy-button {
-  background-color: #2ecc71; /* Green */
-  color: white;
-  padding: 10px 20px;
-  font-size: 1rem;
-}
-
-.room-display .copy-button:hover {
-  background-color: #27ae60;
-}
-
-.room-display .copy-feedback {
-  margin-left: 10px;
-  color: #2ecc71;
-  font-weight: bold;
-}
-
+/* Hint text below buttons */
 .room-display .hint {
-  font-size: 0.9rem;
-  color: #bbb;
-  margin-top: 15px;
+    font-size: 0.9em;
+    color: #ccc;
+    margin-bottom: 20px; /* Space before the Leave Room button */
 }
 
-.opponent-left-message {
-    background-color: #f44336; /* Red background for disconnect message */
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-}
+/* REMOVED: Styles for error messages inside RoomDisplay */
+/* .room-display .error-message { ... } */
 
-.opponent-left-message h2 {
-    color: white; /* Override default h2 color */
-}
+/* REMOVED: Styles for info messages inside RoomDisplay */
+/* .room-display .info-message { ... } */
+
+/* Ensure buttons within RoomDisplay consistently use global button styles */
+/* Assuming .btn-primary and .btn-secondary are defined in App.css or GamePage.css */
+/* These will ensure consistent look for Copy Room Link and Leave Room buttons */
+
+/* General button styles are defined in App.css for .btn-primary, .btn-secondary */
+/* Specific overrides for RoomDisplay's buttons can go here if needed */
