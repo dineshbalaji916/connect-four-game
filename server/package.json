@@ -1,0 +1,22 @@
+{
+  "name": "connect-four-backend",
+  "version": "1.0.0",
+  "description": "Connect Four Multiplayer Game Backend",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

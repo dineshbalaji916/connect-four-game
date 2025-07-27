@@ -1,0 +1,60 @@
+.game-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 700px; /* Max width for the game area */
+  box-sizing: border-box;
+}
+
+.game-page .game-message, .game-page .error-message {
+  font-size: 1.1rem;
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 400px;
+}
+
+.game-page .game-message {
+  background-color: #4CAF50; /* Green for success/info */
+  color: white;
+}
+
+.game-page .error-message {
+  background-color: #f44336; /* Red for errors */
+  color: white;
+}
+
+.scoreboard {
+  background-color: #444a57;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+  text-align: left;
+}
+
+.scoreboard h3 {
+  color: #61dafb;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.scoreboard p {
+  margin: 5px 0;
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.scoreboard .player-score {
+  font-weight: bold;
+}

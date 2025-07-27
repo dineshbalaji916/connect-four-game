@@ -1,0 +1,59 @@
+.game-cell {
+  background-color: #363a43; /* Dark background for the holes */
+  border-radius: 50%; /* Make it round */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Important for piece drop animation */
+  padding-bottom: 100%; /* Aspect ratio trick for squares */
+}
+
+.cell-hole {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  background-color: #282c34; /* Actual hole color */
+  overflow: hidden; /* Hide overflowing pieces initially */
+}
+
+.game-piece {
+  position: absolute;
+  width: 90%; /* Piece slightly smaller than hole */
+  height: 90%;
+  border-radius: 50%;
+  /* Colors will be set by specific classes */
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
+  z-index: 5; /* Below click areas, above hole background */
+}
+
+.piece-player-one {
+  background-color: #e74c3c; /* Red */
+}
+
+.piece-player-two {
+  background-color: #f1c40f; /* Yellow */
+}
+
+.piece-bot {
+    background-color: #9b59b6; /* Purple for bot */
+}
+
+/* Animation for piece drop */
+.animate-drop {
+  animation: dropPiece 0.5s ease-out forwards;
+}
+
+@keyframes dropPiece {
+  0% {
+    transform: translateY(-200%); /* Start above the board */
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0%); /* Drop into position */
+    opacity: 1;
+  }
+}

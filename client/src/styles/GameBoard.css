@@ -1,0 +1,37 @@
+.game-board {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr); /* 6 rows */
+  grid-template-columns: repeat(7, 1fr); /* 7 columns */
+  background-color: #4a6fa5; /* Connect Four blue */
+  border: 5px solid #3c5a90;
+  border-radius: 10px;
+  padding: 10px;
+  gap: 5px;
+  position: relative; /* For clickable areas */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  max-width: 100%; /* Ensure it fits smaller screens */
+  aspect-ratio: 7 / 6; /* Maintain aspect ratio (roughly) */
+  width: 100%; /* Fill available width */
+}
+
+.column-click-areas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  z-index: 10; /* Above the board cells */
+}
+
+.column-click-area {
+  background-color: transparent; /* Invisible, just for clicks */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 5px; /* Match board corners */
+}
+
+.column-click-area:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+}

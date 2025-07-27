@@ -1,0 +1,42 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 900px; /* Limit overall app width */
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+}
+
+.app-header {
+  padding: 20px;
+  background-color: #20232a;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.app-header h1 {
+  margin: 0;
+  color: #61dafb;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.not-found {
+  margin-top: 50px;
+  font-size: 1.2rem;
+  color: #ff6b6b;
+}
