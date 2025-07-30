@@ -1,28 +1,24 @@
 import { checkWin, checkDraw } from './gameLogic.js';
 
-export const rooms = {}; // In-memory storage for active game rooms
+export const rooms = {}; 
 
-// Generates a unique, persistent ID for a player within a session
 function generatePlayerId() {
     return 'player_' + Math.random().toString(36).substr(2, 9);
 }
 
-// Generates a unique Room ID
 function generateRoomId() {
   let id;
   do {
       id = Math.random().toString(36).substr(2, 6).toUpperCase();
-  } while (rooms[id]); // Ensure unique Room ID
+  } while (rooms[id]); 
   return id;
 }
 
-// Creates an empty Connect Four board (7 columns, each column is an array of 6 rows)
 function createEmptyBoard() {
   const numRows = 6;
   const numCols = 7;
-  // This creates an array of 7 columns, where each column is an empty array.
-  // Disks will be pushed into these column arrays, and the frontend will render them bottom-up.
-  return Array.from({ length: numCols }, () => []); // Each element is a column (an array)
+
+  return Array.from({ length: numCols }, () => []); 
 }
 
 export function createRoom(socketId) {
@@ -33,22 +29,21 @@ export function createRoom(socketId) {
         { id: playerOneId, socketId: socketId, name: 'Player 1', score: 0, isBot: false, marker: 'P1' }
     ],
     board: createEmptyBoard(),
-    currentTurn: playerOneId, // Player 1 starts
-    status: 'waiting', // (waiting, playing, game-over, opponent-left)
-    lastMove: null, // Stores {row, col, playerId} for UI animations
-    gameCounter: 0, // Tracks how many games played in this room session
+    currentTurn: playerOneId, 
+    status: 'waiting', 
+    lastMove: null, 
+    gameCounter: 0,
   };
   console.log(`Room ${roomId} created. Player 1: ${playerOneId}`);
   return { roomId, playerIdentifier: playerOneId };
 }
 
-export function joinRoom(roomId, newPlayerSocketId) { // Renamed parameter to newPlayerSocketId for clarity
+export function joinRoom(roomId, newPlayerSocketId) { 
   const room = rooms[roomId];
   if (!room || room.players.length >= 2 || room.status !== 'waiting') {
     return { success: false };
   }
-  // Prevent same socket from joining multiple times (e.g., refresh)
-  // Use newPlayerSocketId instead of socketId
+
   if (room.players.some(p => p.socketId === newPlayerSocketId)) { 
       return { success: false, message: 'Player already in room' };
   }
@@ -58,28 +53,13 @@ export function joinRoom(roomId, newPlayerSocketId) { // Renamed parameter to ne
       { id: playerTwoId, socketId: newPlayerSocketId, name: 'Player 2', score: 0, isBot: false, marker: 'P2' }
   );
 
-  // Randomly decide who goes first for the initial game
+
   room.currentTurn = room.players[Math.floor(Math.random() * room.players.length)].id;
-  room.status = 'playing'; // Game starts immediately on join
+  room.status = 'playing'; 
   console.log(`Player ${newPlayerSocketId} joined room ${roomId}. Player 2: ${playerTwoId}`);
   return { success: true, playerIdentifier: playerTwoId };
 }
 
-export function addBotPlayer(roomId) {
-    const room = rooms[roomId];
-    if (!room || room.players.length >= 2 || room.players[0].isBot) {
-        return null; // Cannot add bot if room is full or first player is already a bot
-    }
-    const botId = 'bot_' + Math.random().toString(36).substr(2, 9);
-    room.players.push(
-        { id: botId, socketId: null, name: 'Connect Four Bot', score: 0, isBot: true, marker: 'BOT' }
-    );
-    // Randomly decide who goes first
-    room.currentTurn = room.players[Math.floor(Math.random() * room.players.length)].id;
-    room.status = 'playing';
-    console.log(`Bot ${botId} added to room ${roomId}`);
-    return botId;
-}
 
 export function removePlayerFromRoom(roomId, socketId) {
     const room = rooms[roomId];
@@ -109,8 +89,7 @@ export function makeMove(roomId, playerId, column) {
   const board = room.board;
   const numRows = 6;
 
-  // Check if the column is full
-  if (column < 0 || column >= board.length) { // Check column bounds first
+  if (column < 0 || column >= board.length) { 
     console.error(`makeMove Error: Column ${column} is out of bounds for room ${roomId}. Board length: ${board.length}`);
     return null;
   }
@@ -162,12 +141,11 @@ export function makeMove(roomId, playerId, column) {
 export function resetGame(roomId) {
     const room = rooms[roomId];
     if (room) {
-        room.board = createEmptyBoard(); // Reset board to 7 empty columns
-        // Randomly determine who goes first for the next game (could be same player)
+        room.board = createEmptyBoard(); 
         room.currentTurn = room.players[Math.floor(Math.random() * room.players.length)].id;
-        room.status = 'playing'; // Set status back to playing
-        room.lastMove = null; // Clear last move
-        room.gameCounter++; // Increment game counter
+        room.status = 'playing'; 
+        room.lastMove = null; 
+        room.gameCounter++; 
         console.log(`Game ${room.gameCounter} started in room ${roomId}. Current turn: ${room.currentTurn}`);
         return true;
     }

@@ -6,13 +6,13 @@ const TurnIndicator = ({ currentTurn, playerIdentifier, players, getPlayerName }
   let turnClass = '';
 
   if (!currentTurn || players.length === 0) {
-      turnMessage = 'Game starting...';
+    turnMessage = 'Game starting...';
   } else if (currentTurn === playerIdentifier) {
-      turnMessage = "Your Turn!";
-      turnClass = 'your-turn';
+    turnMessage = "Your Turn!";
+    turnClass = 'your-turn';
   } else {
-      turnMessage = `${getPlayerName(currentTurn)}'s Turn`;
-      turnClass = 'opponent-turn';
+    turnMessage = `${getPlayerName(currentTurn)}'s Turn`;
+    turnClass = 'opponent-turn';
   }
 
   return (

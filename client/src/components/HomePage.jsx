@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useGame } from "../contexts/GameContext.jsx";
 import { useNavigate } from "react-router-dom";
 import "./../styles/HomePage.css";
@@ -7,7 +7,6 @@ const HomePage = () => {
   const {
     roomId,
     gameStatus,
-    playerIdentifier,
     players,
     createNewRoom,
     joinExistingRoom,
@@ -16,6 +15,7 @@ const HomePage = () => {
     message,
     isConnected,
   } = useGame();
+
   const navigate = useNavigate();
   const [inputRoomId, setInputRoomId] = useState("");
 
@@ -37,17 +37,11 @@ const HomePage = () => {
     }
   };
 
-  // Ensure players is an object before calling Object.keys()
   const currentPlayersCount = players ? Object.keys(players).length : 0;
 
-
   return (
-    // MODIFIED: Added " card" to the className for consistent styling
     <div className="home-page card">
       <h2>Welcome to Connect Four!</h2>
-      {/* GLOBAL: error and message components here now */}
-      {error && <div className="error-message">{error}</div>}
-      {message && <div className="info-message">{message}</div>}
 
       {!isConnected && (
         <div className="connection-status">
@@ -56,7 +50,6 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Only show lobby controls if in 'lobby' or 'opponent-left' state (after a game) */}
       {(isConnected && (gameStatus === 'lobby' || gameStatus === 'opponent-left')) && (
         <div className="lobby-controls">
           <button onClick={handleCreateRoom} className="btn-primary">Create New Game</button>
@@ -73,18 +66,14 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Display room info if a room is active, but not for navigation purposes here */}
-      {/* REMOVED: Redundant "Waiting for an opponent..." message from here */}
       {(gameStatus === 'waiting' || gameStatus === 'playing' || gameStatus === 'game-over') && roomId && (
         <div className="room-info">
           <p>You are in Room: <strong>{roomId}</strong></p>
-          {/* REMOVED: {gameStatus === 'waiting' && <p>Waiting for an opponent...</p>} */}
           {gameStatus === 'playing' && <p>Game in progress...</p>}
           {gameStatus === 'game-over' && <p>Game has ended.</p>}
         </div>
       )}
 
-      {/* Provide an explicit "Start New Game" button after opponent leaves */}
       {gameStatus === 'opponent-left' && (
         <div className="post-game-options">
             <p className="info-message">Your opponent has left the game. You can start a new one.</p>
