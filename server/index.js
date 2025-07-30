@@ -13,7 +13,7 @@ app.use(cors());
 
 const io = new SocketIOServer(httpServer, {
   cors: {
-    origin: "*", 
+    origin: "https://connect-four-game-frontend.vercel.app/", 
     methods: ["GET", "POST"]
   }
 });
